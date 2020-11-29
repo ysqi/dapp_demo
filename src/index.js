@@ -46,6 +46,8 @@ var app = {
                     // conn.monitor(provider);
                     //warp use etherjs
                     app.wallet = conn.getConnector(provider);
+                    app.provider = provider;
+                    // app.web3Provider = new providers.Web3Provider(provider);
                     app.web3Provider = conn.getWeb3Provider(provider.isMetaMask ? provider.networkVersion : provider.chainId);
                     app.saveLoginInfo(accounts);
                     $(".apis").show();
@@ -68,12 +70,12 @@ var app = {
 
         var btn = $("<button>disConnect</button>");
         btn.on('click', async function () {
-            if (app.wallet.isMetaMask) {
+            if (app.provider.isMetaMask) {
                 //clear login info
                 loginObj.hide();
                 logger.info("login out");
             } else {
-                await app.wallet.disconnect().then(r => {
+                await app.provider.close().then(r => {
                     logger.info("disconnect", r);
                     loginObj.hide();
                     logger.info("login out");
@@ -101,7 +103,8 @@ var app = {
 
     // 网络连接信息
     async net_version() {
-        return app.wallet.request({ method: "net_version" })
+        // app.web3Provider
+        return app.provider.request({ method: "net_version" })
             .then(chainId => {
                 // more: https://chainid.network/
                 var networks = {

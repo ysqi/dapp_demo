@@ -32,6 +32,7 @@ var conn = {
         if (typeof chainId == "string") {
             chainId = parseInt(chainId, 10);
         }
+        // Infura 是一个Ethereum blokchain Node
         return new providers.InfuraProvider(chainId, infuraId);
     },
     getConnector(provider) {
