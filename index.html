@@ -1,0 +1,44 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title><%= htmlWebpackPlugin.options.title %></title>
+</head>
+
+<body>
+    <div>
+        <button class="connMetaMask">connect MetaMask</button>
+        <button class="connMobileWallet">connect Mobile Wallet</button>
+    </div>
+    <div class="login">
+        <div><span class="address"></span></div>
+        <div class="action"></div>
+    </div>
+
+    <div class="apis" style="display: none;">
+        <!-- api wiki https://eth.wiki/json-rpc -->
+        <fieldset data-api="eth_getBalance">
+            <legend>get balance</legend>
+            address:<input type="text" name="address"></input>
+            <button> call </button>
+            <div class="result"></div>
+
+        </fieldset>
+        <fieldset data-api="net_version">
+            <legend>eth_chainId</legend>
+            <button>call</button>
+            <div class="result"></div>
+        </fieldset>
+        <fieldset data-api="signMsg">
+            <legend>signMsg</legend>
+            <input type="text" name="msg"></input>
+            <button>call</button>
+            <div class="result"></div>
+        </fieldset>
+    </div>
+
+    <div class="infoPanel"></div>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</body>
+
+</html>
